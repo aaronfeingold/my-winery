@@ -1,5 +1,21 @@
 Rails.application.routes.draw do
-  resources :users
+  
   resources :wines
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  
+  resources :users, only: [:new, :create, :destroy] do 
+    resources :wines
+  end 
+
+  root 'sessions#home'
+  get '/signup' => 'users#new'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
+
+  get '/filter' => 'wines#filter'
+  
+  match '/auth/github/callback', to: 'sessions#githubcreate', via: [:get, :post]
+
+  match '*a' => 'concerts#index', via: [:get]
+
 end
