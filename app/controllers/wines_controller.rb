@@ -1,4 +1,5 @@
 class WinesController < ApplicationController
+  before_action :set_wine, except: [:index, :new, :create]
 
   def show
     @wine = Wine.find(params[:id])
@@ -10,20 +11,36 @@ class WinesController < ApplicationController
 
   def new
     @wine = Wine.new
-    @wine.vineyards.build(name: "Vineyard 1")
   end
 
   def create
-    binding.pry
-    wine.create(wine_params)
+    Wine.create(strong_wine_params)
     redirect_to wines_path
   end
 
-  private
-  def wine_params
-    params.require(:wine).permit(
-      :name,
-      vineyard_attributes: [ :name, :varietals ]
-    )
+  def edit
   end
+
+  def update
+    if @wine.update(strong_wine_params)
+      redirect_to wine_path(@wine)
+    else
+      render :edit
+    end
+  end
+
+  private
+
+    def set_wine
+      @wine = Wine.find_by_id(params[:id])
+    end
+
+    def strong_wine_params
+      params.require(:wine).permit(
+        :name,
+        :vintage,
+        :bottled_date,
+        vineyard_attributes: [ :name, :varietals ]
+      )
+    end
 end

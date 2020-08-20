@@ -1,11 +1,3 @@
-<%= form_for @wine do |f| %>
-  <%= f.label "Wine Bottle Name:" %>
-  <%= f.text_field :name %><br/>
+<h1>Add Wine</h1>
 
-  <%= f.fields_for :vinyards do |inner_form| %>
-    <%= inner_form.label "Vineyard Name" %>
-    <%= inner_form.text_field :name %><br/>
-  <% end %>
-
-  <%= f.submit %>
-<% end %>
+<%= render partial: "wines/form", locals: {wine: @wine, button_name: "Create Wine"} %>
