@@ -1,0 +1,11 @@
+<%= form_for @wine do |f| %>
+  <%= f.label "Wine Bottle Name:" %>
+  <%= f.text_field :name %><br/>
+
+  <%= f.fields_for :vinyards do |inner_form| %>
+    <%= inner_form.label "Vineyard Name" %>
+    <%= inner_form.text_field :name %><br/>
+  <% end %>
+
+  <%= f.submit %>
+<% end %>
