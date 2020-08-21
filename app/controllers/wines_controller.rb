@@ -1,26 +1,38 @@
 class WinesController < ApplicationController
   before_action :set_wine, except: [:index, :new, :create]
-  before_action :require_login
+  before_action :logged_in?
 
   def show
     @wine = Wine.find(params[:id])
   end
 
   def index
-    if params[:user_id]
-      @wines = User.find(params[:user_id]).wines 
-  else 
-      redirect_to wines_path
-  end 
+    @user = User.find_by_id(params[:user_id])
+    if params[:term]
+      @wine = @user.wines.search(params[:term])
+    else
+      @wines = @user.wines
+    end
   end
 
   def new
-    @wine = Wine.new
+    if params.include?('user_id')
+      @wine = User.find_by_id(params[:user_id]).wines.new
+      @wine2 = User.find_by_id(params[:user_id]).wines.build
+    else
+      @wine = Wine.new
+      @wine.varietals.build
+    end 
   end
 
   def create
-    @wine = current_user.wines.build(strong_wine_params)
-    redirect_to wines_path
+    # byebug
+    @new_wine = current_user.wines.build(strong_wine_params)
+    if @new_wine.save
+      redirect_to user_wine_path(@new_wine)
+    else
+      render :new
+    end
   end
 
   def edit
@@ -44,7 +56,8 @@ class WinesController < ApplicationController
       params.require(:wine).permit(
         :name,
         :vintage,
-        :bottled_date
+        :bottled_date,
+        varietal: [:name]
       )
     end
 end

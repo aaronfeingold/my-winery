@@ -8,10 +8,15 @@
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %><br/>
 
-  <%# Add a form to create vineyard %>
-  <%= f.fields_for :vineyards do |vineyard_obj| %>
-    <%= vineyard_obj.text_field :name %>
+  <%# Add a form to create varietals %>
+
+  <h5>Create Varietals</h5>
+  <%= f.fields_for :varietal do |varietal_obj| %>
+      <%= varietal_obj.label :name %>
+      <%= varietal_obj.text_field :name %>
+    </div>
   <% end %>
-  
+
+  <br>
   <%= f.submit "Create Wine" %>
 <% end %>

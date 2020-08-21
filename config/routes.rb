@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+
   resources :wines
   
   resources :users, only: [:new, :create, :destroy] do 
@@ -16,6 +17,6 @@ Rails.application.routes.draw do
   
   match '/auth/github/callback', to: 'sessions#githubcreate', via: [:get, :post]
 
-  match '*a' => 'concerts#index', via: [:get]
+  match '*a' => 'wines#index', via: [:get]
 
 end

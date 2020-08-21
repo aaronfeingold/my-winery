@@ -1,7 +1,17 @@
-<div class='field'>
-  <%= f.text_field :email, placeholder: 'Email', value: user.email %><br />
-</div>
-<div class='field' >
-  <%= f.password_field :password, placeholder: 'Password' %><br />
-</div>
+<h1>User Sign Up</h1>
+
+<%= render partial: 'layouts/error', locals: {object: @user} %>
+
+
+<%= form_for(@user) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign Up" %>
+
+
 <% end %>

@@ -1,14 +1,13 @@
 class Wine < ApplicationRecord
   belongs_to :user
-  belongs_to :vineyard
+  belongs_to :varietal
   has_many :varietals
-  has_many :vineyards, through: :varietals
+  # has_many :vineyards, through: :varietals
 
   validates :name, presence: true
 
   # validate :check_dates
   
-  accepts_nested_attributes_for :vineyards
   accepts_nested_attributes_for :varietals
 
   scope :bottled, -> { where.not(bottled_date: nil) }

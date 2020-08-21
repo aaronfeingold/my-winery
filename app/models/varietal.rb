@@ -1,3 +1,4 @@
 class Varietal < ApplicationRecord
-  belongs_to :vineyard
+  has_many :wines
+  has_many :users, through: :wines
 end

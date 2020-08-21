@@ -1,5 +1,12 @@
 
 <h1>All Wines: </h1>
+
+<%= form_tag(user_wines_path(current_user), method: "get") do %>
+  <%= text_field_tag :term, nil,  id: "Search", placeholder: "enter search term" %>
+
+  <%= submit_tag "Search"%>
+<% end %>
+
 <ul>
 <% @wines.each do |wine| %>
   <li><%= link_to wine.name, wine %></li>

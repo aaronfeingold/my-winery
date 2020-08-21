@@ -1,28 +1,19 @@
-<% if @user.errors.any? %>
-  <div id="error_explanation">
-    <h3>
-      <%= @user.errors.count %> user
-      <%= 'error'.pluralize(@user.errors.count) %>
-       prohibited your information from being saved:
-    </h3>
+<h1>User Sign Up</h1>
 
-    <ul>
-      <% @user.errors.full_messages.each do |message| %>
-        <li>* <%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= render partial: 'layouts/error', locals: {object: @user} %>
 
-<div>
-  <h2>Sign up</h2>
-</div>
 
-<%= form_for @user do |f| %>
-  <%= render 'form', users/form, user: @user %>
-  <div class='actions'>
-    <%= f.submit 'Sign up', class: "btn btn-primary" %><br />
-  </div>
+<%= form_for(@user) do |f| %>
+
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+
+  <%= f.submit "Sign Up" %>
+
+
 <% end %>
 
 <br /><%= link_to 'Register with Github', '/auth/github' %><br />

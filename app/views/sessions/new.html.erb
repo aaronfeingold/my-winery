@@ -1,20 +1,17 @@
-<div>
-  <h2>Log in</h2>
-</div>
 
-<%= form_tag login_path do %>
-  <div class='field'>
-    <%= text_field_tag :name, nil, placeholder: 'Name' %><br />
+<h1>Login</h1>
+
+<%= form_for @user, url: login_path do |f| %>
+  <div>
+    <%= f.label :email %>
+    <%= f.text_field :email %>
   </div>
-  <div class='field'>
-    <%= password_field_tag :password, nil, placeholder: 'Password' %><br />
+  <div>
+    <%= f.label :password %>
+    <%= f.password_field :password %>
   </div>
-  <br />
-  <div class='actions'>
-    <%= submit_tag 'Log in' %>
-  </div>
+
+  <%= f.submit "Login" %>
 <% end %>
 
-<br /><%= link_to 'Log in with Github', '/auth/github' %><br />
-
-<br /><%= link_to 'Register', new_user_path %>
+<%= link_to "Sign Up With Github", "/auth/github" %>

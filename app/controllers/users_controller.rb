@@ -10,8 +10,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      redirect_to root_path, {notice: 'Thanks for registering! Select ' \
-        'the hotel you want to stay at.'}
+      redirect_to root_path
     else
       render :new
     end
@@ -19,7 +18,6 @@ class UsersController < ApplicationController
 
   def show
     if current_user.id == params[:id].to_i
-      @addresses = Address.remove_empty_addresses(current_user)
       render :show
     else
       flash[:alert] = "You don't have permission to access that profile"
@@ -38,7 +36,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), {notice: "#{@user.name}, your " \
+      redirect_to user_path(@user), {notice: "#{@user.email}, your " \
         "profile has been updated"}
     else
       render :edit
