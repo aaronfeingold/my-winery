@@ -1,9 +1,9 @@
 class Wine < ApplicationRecord
   belongs_to :user
-  # belongs_to :vintage
+  belongs_to :vintage
   # has_many :varietals
   # has_many :vineyards, through: :varietals
-  accepts_nested_attributes_for :vintages 
+  accepts_nested_attributes_for :vintage 
   validates :name, presence: true
  
 

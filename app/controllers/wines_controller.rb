@@ -17,11 +17,11 @@ class WinesController < ApplicationController
 
   def new
     if params.include?('user_id')
-      @wine = User.find_by_id(params[:user_id]).wines.new
+      @wine = current_user.wines.new
       @wine2 = User.find_by_id(params[:user_id]).wines.build
     else
       @wine = Wine.new
-      # @wine.vintages.build
+      @wine.vintages.build
     end 
   end
 
@@ -31,7 +31,6 @@ class WinesController < ApplicationController
     if @new_wine.save
       redirect_to user_wines_path(current_user)
     else
-      # byebug
       render :new
     end
   end
@@ -57,7 +56,7 @@ class WinesController < ApplicationController
       params.require(:wine).permit(
         :name,
         :bottled_date
-        # vintage: [:vintage_year, :vintage_notes]
+        vintage: [:vintage_year, :vintage_notes]
       )
     end
 end
