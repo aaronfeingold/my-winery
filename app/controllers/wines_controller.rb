@@ -21,7 +21,7 @@ class WinesController < ApplicationController
       @wine2 = User.find_by_id(params[:user_id]).wines.build
     else
       @wine = Wine.new
-      @wine.varietals.build
+      @wine.vintages.build
     end 
   end
 
@@ -31,6 +31,7 @@ class WinesController < ApplicationController
     if @new_wine.save
       redirect_to user_wine_path(@new_wine)
     else
+      # byebug
       render :new
     end
   end
@@ -57,7 +58,7 @@ class WinesController < ApplicationController
         :name,
         :vintage,
         :bottled_date,
-        varietal: [:name]
+        vintage: [:vintage_year, :vintage_notes]
       )
     end
 end

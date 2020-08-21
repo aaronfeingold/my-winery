@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_19_232952) do
+ActiveRecord::Schema.define(version: 2020_08_21_002354) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -31,9 +31,15 @@ ActiveRecord::Schema.define(version: 2020_08_19_232952) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "vintages", force: :cascade do |t|
+    t.string "vintage_year"
+    t.string "vintage_notes"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "wines", force: :cascade do |t|
     t.string "name"
-    t.string "vintage"
     t.date "bottled_date"
     t.integer "user_id"
     t.integer "varietal_id"

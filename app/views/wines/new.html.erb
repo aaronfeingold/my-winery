@@ -3,17 +3,17 @@
 <%= form_for(@wine) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %><br/>
-  <%= f.label :vintage %>
-  <%= f.text_field :vintage %><br/>
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %><br/>
 
   <%# Add a form to create varietals %>
 
-  <h5>Create Varietals</h5>
-  <%= f.fields_for :varietal do |varietal_obj| %>
-      <%= varietal_obj.label :name %>
-      <%= varietal_obj.text_field :name %>
+  <h5>Add Vintage</h5>
+  <%= f.fields_for :vintage do |vintage_object| %>
+      <%= vintage_object.label :vintage_year %>
+      <%= vintage_object.text_field :vintage_year %><br/>
+      <%= vintage_object.label :vintage_notes %>
+      <%= vintage_object.text_field :vintage_notes %><br/>
     </div>
   <% end %>
 

@@ -1,20 +1,20 @@
 class Wine < ApplicationRecord
   belongs_to :user
-  belongs_to :varietal
-  has_many :varietals
+  belongs_to :vintage
+  # has_many :varietals
   # has_many :vineyards, through: :varietals
-
+  accepts_nested_attributes_for :vintages 
   validates :name, presence: true
+ 
 
   # validate :check_dates
-  
-  accepts_nested_attributes_for :varietals
 
   scope :bottled, -> { where.not(bottled_date: nil) }
   scope :not_bottled, -> { where(bottled_date: nil) }
   scope :recent_bottled_wines, -> { self.bottled.where("bottled_date > ?", 5.years.ago) }
   scope :sorted_bottled_wines, -> { self.bottled.order(bottle_date: :desc)}
 
+  
   # private
   #   def check_dates
   #     # release_year_exists =  Wine.where(title: self.title, bottled_date: self.bottled_date)
