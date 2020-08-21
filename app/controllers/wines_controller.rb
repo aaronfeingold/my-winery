@@ -17,8 +17,8 @@ class WinesController < ApplicationController
 
   def new
     if params.include?('user_id')
-      @wine = current_user.wines.new
-      @wine2 = User.find_by_id(params[:user_id]).wines.build
+      @wine = current_user.wines.build
+      # @wine.vintages.build
     else
       @wine = Wine.new
       @wine.vintages.build

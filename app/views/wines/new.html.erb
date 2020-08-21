@@ -1,4 +1,4 @@
-<h1>Add Wine</h1>
+<h3>Add Wine</h1>
 
 <%= form_for(@wine) do |f| %>
   <%= f.label :name %>
@@ -7,7 +7,14 @@
   <%= f.date_field :bottled_date %><br/>
 
   <%# Add a form to create vintage %>
-
+<h4>Add Vintage</h5>
+  <%= f.fields_for :vintage do |vintage_object| %>
+      <%= vintage_object.label :vintage_year %>
+      <%= vintage_object.text_field :vintage_year %><br/>
+      <%= vintage_object.label :vintage_notes %>
+      <%= vintage_object.text_field :vintage_notes %><br/>
+    </div>
+  <% end %> 
 
   <%# Add a form to create varietals %>
 

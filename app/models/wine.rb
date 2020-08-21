@@ -4,6 +4,7 @@ class Wine < ApplicationRecord
  
 
   accepts_nested_attributes_for :vintage 
+  
   validates :name, presence: true
 
   scope :bottled, -> { where.not(bottled_date: nil) }
