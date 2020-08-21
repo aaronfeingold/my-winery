@@ -8,14 +8,7 @@
 
   <%# Add a form to create varietals %>
 
-  <h5>Add Vintage</h5>
-  <%= f.fields_for :vintage do |vintage_object| %>
-      <%= vintage_object.label :vintage_year %>
-      <%= vintage_object.text_field :vintage_year %><br/>
-      <%= vintage_object.label :vintage_notes %>
-      <%= vintage_object.text_field :vintage_notes %><br/>
-    </div>
-  <% end %>
+  
 
   <br>
   <%= f.submit "Create Wine" %>
