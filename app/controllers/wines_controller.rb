@@ -16,19 +16,17 @@ class WinesController < ApplicationController
   end
 
   def new
-    if params.include?('user_id')
-      @wine = current_user.wines.build
-      # @wine.vintages.build
+    if logged_in?
+      @wine = current_user.wines.build  
     else
       @wine = Wine.new
-      @wine.vintages.build
     end 
   end
 
   def create
-    @new_wine = current_user.wines.build(strong_wine_params)
+    @wine = current_user.wines.build(strong_wine_params)
     # byebug
-    if @new_wine.save
+    if @wine.save
       redirect_to user_wines_path(current_user)
     else
       render :new
@@ -55,8 +53,9 @@ class WinesController < ApplicationController
     def strong_wine_params
       params.require(:wine).permit(
         :name,
-        :bottled_date
-        vintage: [:vintage_year, :vintage_notes]
+        :bottled,
+        :bottled_date,
+        varietals: [:name]
       )
     end
 end
