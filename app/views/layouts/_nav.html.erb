@@ -1,0 +1,20 @@
+<nav class="teal darken-3">
+  <div class="container">
+      
+                    <!-- Neutral Links -->
+          <%= link_to "Home", root_path %>
+      <ul class="right">
+        <% unless logged_in? %>
+          <li><%= link_to "Signup", signup_path %></li>
+          <li><%= link_to "Login", login_path %></li>
+      </ul>
+        <% else %>
+         
+          
+          <li><%= link_to "Wines", user_wines_path(current_user) %></li>
+          <li><%= link_to "Create Wine", new_user_wine_path(current_user) %></li>
+          <li><%= link_to "Logout", logout_path, method: "delete" %></li>
+        <% end %>
+      </ul>
+  </div>
+</nav>

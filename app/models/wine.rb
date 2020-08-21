@@ -7,6 +7,17 @@ class Wine < ApplicationRecord
   
   validates :name, presence: true
 
+  with_options if: :bottled? do |wine|
+    wine.validates :bottled_date, presence: true
+    wine.validates :bottled_date, numericality: {
+      less_than_or_equal_to: Date.today.year
+    }
+  end
+
+  def bottled?
+    bottled
+  end
+
   scope :bottled, -> { where.not(bottled: nil) }
   scope :not_bottled, -> { where(bottled: nil) }
   scope :recent_bottled_wines, -> { self.bottled.where("bottled_date > ?", 5.years.ago) }

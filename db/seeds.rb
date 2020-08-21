@@ -9,6 +9,6 @@
 # varietal = Varietal.create(name: "Pinot Noir")
 # varietal = Varietal.create(name: "Chardonnay")
 # varietal = Varietal.create(name: "Pinot Grigio")
-# varietal = Varietal.create(name: "Red Blend")
-# varietal = Varietal.create(name: "White Blend")
 # varietal = Varietal.create(name: "No Varietal")
+varietal = Varietal.create(name: "Red Blend")
+varietal = Varietal.create(name: "White Blend")

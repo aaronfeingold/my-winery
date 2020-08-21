@@ -1,0 +1,30 @@
+<%= form_for(@wine) do |f| %>
+  <% if @wine.errors.any? %>
+    <div id="error_explanation">
+      <h2>There were some errors:</h2>
+
+      <ul>
+        <% @wine.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br/>
+  <%= f.label :bottled %>
+  <%= f.check_box :bottled %><br/>
+  <%= f.label :bottled_date %>
+  <%= f.date_field :bottled_date %><br/>
+    <%# a collection check box for varietals %>
+  <%= f.collection_select :varietal_id, Varietal.all, :id, :name %>
+    <%# Add a form to add a new varietal %>
+
+    <%# Add a form to create vineyard %>
+
+  
+
+  <br>
+  <%= f.submit "Create Wine" %>
+<% end %>

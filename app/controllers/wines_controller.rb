@@ -19,15 +19,15 @@ class WinesController < ApplicationController
     if logged_in?
       @wine = current_user.wines.build
     else
-      @wine = Wine.new
-      @wines.varietals.build
+      flash[:error] = "You must be logged_in in order to do that"
+      redirect_to login_path 
     end 
   end
 
   def create
     @wine = current_user.wines.build(strong_wine_params)
     if @wine.save
-      redirect_to user_wine_path(current_user)
+      redirect_to user_wines_path(current_user)
     else
       render :new
     end
