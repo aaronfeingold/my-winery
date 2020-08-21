@@ -27,7 +27,7 @@ class WinesController < ApplicationController
   def create
     @wine = current_user.wines.build(strong_wine_params)
     if @wine.save
-      redirect_to user_wines_path(current_user)
+      redirect_to user_wine_path(current_user)
     else
       render :new
     end
@@ -45,7 +45,7 @@ class WinesController < ApplicationController
   def update
     @wine = current_user.wines.find_by_id(params[:id])
       if @wine.update(strong_wine_params)
-          redirect_to user_wines_path(current_user)
+          redirect_to user_wine_path(params[:id])
       else
         flash[:error] = "Something has gone vastly wrong"
         render :edit

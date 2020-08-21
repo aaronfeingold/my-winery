@@ -1,5 +1,5 @@
 <h1>Wine Name: <%= @wine.name %></h1>
-<h3>Bottled?</h3>
+<h3>Bottled? <%= @wine.bottled  ? "Yes" : "No" %></h3>
 <h3>Bottling Date: <%= @wine.bottled_date %></h3>
 <h3>Varietal: <%= Varietal.all.find_by_id(@wine.varietal_id).name %></h3>
 <%# add link to edit %>
