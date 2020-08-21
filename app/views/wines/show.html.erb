@@ -1,2 +1,9 @@
-<h1>Wine: <%= @wine.name %></h1>
+<h1>Wine Name: <%= @wine.name %></h1>
+<h3>Bottled?</h3>
 <h3>Bottling Date: <%= @wine.bottled_date %></h3>
+<h3>Varietal: <%= Varietal.all.find_by_id(@wine.varietal_id).name %></h3>
+<%# add link to edit %>
+<%= link_to "Edit Wine", edit_wine_path(@wine) %> 
+<br>
+<%# add link to destroy %>
+<%= link_to 'Delete', @wine, method: :delete, data: { confirm: 'For real?' } %>

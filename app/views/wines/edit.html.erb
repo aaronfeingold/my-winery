@@ -1,2 +1,21 @@
 <h1>Edit <%= @wine.name %></h1>
 
+<%= form_for(@wine) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %><br/>
+  <%= f.label :bottled %>
+  <%= f.check_box :bottled %><br/>
+  <%= f.label :bottled_date %>
+  <%= f.date_field :bottled_date %><br/>
+    <%# a collection check box for varietals %>
+  <%= f.collection_select :varietal_id, Varietal.all, :id, :name %>
+    <%# Add a form to add a new varietal %>
+
+    <%# Add a form to create vineyard %>
+
+  
+
+  <br>
+  <%= f.submit "Update Wine" %>
+<% end %>
+

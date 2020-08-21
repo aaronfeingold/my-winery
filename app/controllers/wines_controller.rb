@@ -9,7 +9,7 @@ class WinesController < ApplicationController
   def index
     @user = User.find_by_id(params[:user_id])
     if params[:term]
-      @wine = @user.wines.search(params[:term])
+      @wines = @user.wines.search(params[:term])
     else
       @wines = @user.wines
     end
@@ -17,15 +17,15 @@ class WinesController < ApplicationController
 
   def new
     if logged_in?
-      @wine = current_user.wines.build  
+      @wine = current_user.wines.build
     else
       @wine = Wine.new
+      @wines.varietals.build
     end 
   end
 
   def create
     @wine = current_user.wines.build(strong_wine_params)
-    # byebug
     if @wine.save
       redirect_to user_wines_path(current_user)
     else
@@ -34,14 +34,28 @@ class WinesController < ApplicationController
   end
 
   def edit
+    if logged_in?
+      @wine = current_user.wines.find_by_id(params[:id])
+    else
+      flash[:error] = "You must be logged_in in order to do that"
+      redirect_to login_path 
+    end 
   end
 
   def update
-    if @wine.update(strong_wine_params)
-      redirect_to wine_path(@wine)
-    else
-      render :edit
-    end
+    @wine = current_user.wines.find_by_id(params[:id])
+      if @wine.update(strong_wine_params)
+          redirect_to user_wines_path(current_user)
+      else
+        flash[:error] = "Something has gone vastly wrong"
+        render :edit
+      end
+  end
+
+  def destroy
+    @wine = Wine.find(params[:id])
+    @wine.destroy
+    redirect_to user_wines_path(current_user)
   end
 
   private
@@ -55,7 +69,6 @@ class WinesController < ApplicationController
         :name,
         :bottled,
         :bottled_date,
-        varietals: [:name]
-      )
+        :varietal_id)
     end
 end

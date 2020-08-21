@@ -7,13 +7,11 @@
   <%= f.check_box :bottled %><br/>
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %><br/>
+    <%# a collection check box for varietals %>
+  <%= f.collection_select :varietal_id, Varietal.all, :id, :name %>
+    <%# Add a form to add a new varietal %>
 
-  <%# Add a form to add or create new varietals %>
- <%= f.fields_for :varietals do |varietal| %>
-      <%= varietal.label :name %>
-      <%= varietal.check_box :name %><br/>
- <% end %>
-  <%# Add a form to create vineyard %>
+    <%# Add a form to create vineyard %>
 
   
 
