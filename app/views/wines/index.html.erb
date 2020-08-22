@@ -1,7 +1,7 @@
 
 <h1>All Wines: </h1>
 
-<h3>Search all Bottled Wine</h3>
+<h3>Search all for all Unbottled Wines by name</h3>
 <%= form_tag(user_wines_path(current_user), method: "get") do %>
   <%= text_field_tag :term, nil,  id: "Search", placeholder: "enter search term" %>
 
@@ -11,7 +11,8 @@
   <thead>
     <tr>
       <th>Wine Name</th>
-      <th></th>
+      <th>Varietal</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -19,6 +20,8 @@
     <% @wines.each do | wine| %>
       <tr>
         <td><%= wine.name %></td>
+        <td><%= varietal = Varietal.find_by_id(wine.varietal_id).name %></td>
+       
         <td>
           <%= link_to 'View', wine %> |
           <%= link_to 'Edit', edit_wine_path(wine) %> |

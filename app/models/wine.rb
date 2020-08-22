@@ -18,11 +18,10 @@ class Wine < ApplicationRecord
   #   bottled
   # end
 
-  scope :bottled, -> { where(bottled: true) }
-  scope :not_bottled, -> { where(bottled: nil) }
-  scope :recent_bottled_wines, -> { self.bottled.where("bottled_date > ?", 5.years.ago) }
-  scope :sorted_bottled_wines, -> { self.bottled.order(bottle_date: :desc)}
-  scope :search, -> (term) { self.sorted_bottled_wines.where("name LIKE ?", "%#{term}%") }
+  scope :bottled, -> { where.not(bottled: nil) }
+  scope :not_bottled, -> { where.not(bottled: true) }
+  scope :sorted_not_bottled_wines, -> { self.not_bottled.order(name: :desc)}
+  scope :search, -> (term) { self.sorted_not_bottled_wines.where("name LIKE ?", "%#{term}%") }
  
  
   

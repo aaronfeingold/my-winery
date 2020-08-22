@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_22_032131) do
+ActiveRecord::Schema.define(version: 2020_08_22_191701) do
 
   create_table "users", force: :cascade do |t|
     t.string "email"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 2020_08_22_032131) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "bottled"
     t.integer "varietal_id"
+    t.integer "barrel"
+    t.string "barrel_location"
   end
 
 end

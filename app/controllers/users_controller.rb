@@ -7,19 +7,24 @@ class UsersController < ApplicationController
   end
 
   def create
-    if user_params[:password] == user_params[:password_confirmation]
+    if password_confirmed
       @user = User.new(user_params)
         if @user.save
           session[:user_id] = @user.id
-          redirect_to root_path
+          redirect_to root_path  
         else
           flash[:errors] = @user.errors.full_messages
           render :new
         end
-    else 
-        @user = User.new
-        flash[:errors] = @user.errors.full_messages
-        render :new
+    elsif !password_confirmed
+      @user = User.new(user_params)
+        if @user.save
+          session[:user_id] = @user.id
+          redirect_to root_path  
+        else
+          flash[:errors] = @user.errors.full_messages
+          render :new
+        end
     end
   end
 
@@ -69,4 +74,8 @@ class UsersController < ApplicationController
       :name
     )
   end
+
+  def password_confirmed
+    user_params[:password] == user_params[:password_confirmation]
+  end 
 end
