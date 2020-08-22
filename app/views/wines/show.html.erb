@@ -5,5 +5,8 @@
 <%# add link to edit %>
 <%= link_to "Edit Wine", edit_wine_path(@wine) %> 
 <br>
+<%= link_to "Back to all your wines", user_wines_path(current_user) %> 
+<br>
+<br>
 <%# add link to destroy %>
 <%= link_to 'Delete', @wine, method: :delete, data: { confirm: 'For real?' } %>

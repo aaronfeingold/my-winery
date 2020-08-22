@@ -10,4 +10,10 @@ class ApplicationController < ActionController::Base
     def logged_in?
       !!session[:user_id]
     end
+
+    def require_login
+      redirect_to login_path,
+        {alert: 'You must be logged in access that page'} unless
+        session.include? :user_id
+    end
 end

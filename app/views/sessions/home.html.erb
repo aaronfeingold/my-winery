@@ -1,6 +1,12 @@
-<h1>This is your Winery</h1>
+<% if !logged_in? %>
+  <p>Are you a winemaker? If so, feel free to create an account or login</p>
+
+<% else %>
+<h4>Welcome Back <%= current_user.name %></h4>
+<h3>This is your Winery</h3>
 <div>
   <p>You have many made wines in your life,</p>
   <p>And have celebrated many fine vintages.</p>
   <p>Now you can look back and compare.</p>
 </div>
+<% end %>

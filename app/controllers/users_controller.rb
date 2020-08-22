@@ -7,12 +7,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to root_path
-    else
-      render :new
+    if user_params[:password] == user_params[:password_confirmation]
+      @user = User.new(user_params)
+        if @user.save
+          session[:user_id] = @user.id
+          redirect_to root_path
+        else
+          flash[:errors] = @user.errors.full_messages
+          render :new
+        end
+    else 
+        @user = User.new
+        flash[:errors] = @user.errors.full_messages
+        render :new
     end
   end
 
@@ -57,7 +64,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(
       :email,
-      :password
+      :password,
+      :password_confirmation,
+      :name
     )
   end
 end

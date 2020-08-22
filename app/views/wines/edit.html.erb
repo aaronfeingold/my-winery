@@ -1,4 +1,9 @@
 <h1>Edit <%= @wine.name %></h1>
+<% if !!flash[:errors] %>
+   <% flash[:errors].each do |e| %>
+    <p><%= e %></p> <br>
+    <% end %>
+<% end %>
 
 <%= form_for(@wine) do |f| %>
   <%= f.label :name %>
@@ -8,6 +13,7 @@
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %><br/>
     <%# a collection check box for varietals %>
+  <%= f.label :varietal %>
   <%= f.collection_select :varietal_id, Varietal.all, :id, :name %>
     <%# Add a form to add a new varietal %>
 
@@ -19,3 +25,8 @@
   <%= f.submit "Update Wine" %>
 <% end %>
 
+<script>
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>

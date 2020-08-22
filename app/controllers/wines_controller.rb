@@ -29,6 +29,7 @@ class WinesController < ApplicationController
     if @wine.save
       redirect_to user_wines_path(current_user)
     else
+      flash[:errors] = @wine.errors.full_messages
       render :new
     end
   end
@@ -47,7 +48,8 @@ class WinesController < ApplicationController
       if @wine.update(strong_wine_params)
           redirect_to user_wine_path(params[:id])
       else
-        flash[:error] = "Something has gone vastly wrong"
+        # byebug
+        flash[:error] = @wine.errors.full_messages
         render :edit
       end
   end
@@ -69,6 +71,7 @@ class WinesController < ApplicationController
         :name,
         :bottled,
         :bottled_date,
-        :varietal_id)
+        :varietal_id
+        )
     end
 end

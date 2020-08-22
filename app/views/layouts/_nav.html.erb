@@ -9,8 +9,6 @@
           <li><%= link_to "Login", login_path %></li>
       </ul>
         <% else %>
-         
-          
           <li><%= link_to "Wines", user_wines_path(current_user) %></li>
           <li><%= link_to "Create Wine", new_user_wine_path(current_user) %></li>
           <li><%= link_to "Logout", logout_path, method: "delete" %></li>
