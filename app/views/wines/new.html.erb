@@ -1,34 +1,3 @@
 <h3>Add Wine</h1>
-<% if !!flash[:errors] %>
-   <% flash[:errors].each do |e| %>
-    <p><%= e %></p> <br>
-    <% end %>
-<% end %>
-
-<%= form_for(@wine) do |f| %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %><br/>
-  <%= f.check_box :bottled %>
-  <%= f.label 'bottled', id: :bottled %><br/>
-  <%= f.label :bottled_date %>
-  <%= f.date_field :bottled_date %><br/>
-  
-    <%# a collection check box for varietals %>
-  <%= f.label :varietal %>  
-  <%= f.collection_select :varietal_id, Varietal.all, :id, :name %>
-    <%# Add a form to add a new varietal %>
-
-    <%# Add a form to create vineyard %>
-
-  
-
-  <br>
-  <%= f.submit "Create Wine" %>
-<% end %>
-
-<script>
-  $(document).ready(function(){
-    $('select').formSelect();
-  });
-</script>
+<%= render partial: 'layouts/error', locals: {object: @wine} %>
+<%= render partial: 'form', locals: {wine: @wine, button_name: "Create Wine"} %>
