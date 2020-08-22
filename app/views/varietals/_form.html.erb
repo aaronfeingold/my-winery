@@ -1,0 +1,18 @@
+<%= form_for varietal do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %><br/>
+
+    <%# Add a form to create vineyard %>
+
+  
+
+  <br>
+  <%= f.submit button_name, class: "btn" %>
+<% end %>
+
+<script>
+  $(document).ready(function(){
+    $('select').formSelect();
+  });
+</script>

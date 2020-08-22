@@ -1,0 +1,20 @@
+<h3>All Varietals</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Varietal Name</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @varietals.each do | varietal| %>
+      <tr>
+        <td><%= varietal.name %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
