@@ -9,8 +9,8 @@ class Wine < ApplicationRecord
 
   # with_options if: :bottled? do |wine|
   #   wine.validates :bottled_date, presence: true
-  #   wine.validates :bottled_date, numericality: {
-  #     less_than_or_equal_to: Date.today.year
+  #   wine.validates :bottled_date, date: {
+  #     less_than_or_equal_to: Date.today
   #   }
   # end
 

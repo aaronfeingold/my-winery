@@ -7,10 +7,10 @@
   <%= f.text_field :barrel %>
   <br>
   <%= f.label :barrel_location %>
-  <%= f.text_field :barrel_location %>
+  <%= f.select :barrel_location, options_for_select(["Main Warehouse", "Overflow", "Offsite"]) %>
   <br>
   <%= f.label :bottled? %>
-  <%= f.select :bottled, options_for_select([true, false]) %>
+  <%= f.select :bottled, options_for_select([false, true]) %>
   <br>
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %>
@@ -20,6 +20,15 @@
   <%= f.label :varietal %>
   <%= f.collection_select :varietal_id, varietals, :id, :name %>
     <%# Add a form to add a new varietal %>
+
+  <h5>Create Varietal</h5>
+  <%= f.fields_for :varietal, wine.build_varietal do |varietal_fields| %>
+    <div class="input-field">
+      <%= varietal_fields.label :name %>
+      <%= varietal_fields.text_field :name %>
+    </div>
+
+  <% end %>
 
     <%# Add a form to create vineyard %>
 

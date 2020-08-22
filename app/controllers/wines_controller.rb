@@ -28,6 +28,7 @@ class WinesController < ApplicationController
       flash[:notice] = "Wine successfully created"
       redirect_to user_wines_path(current_user)
     else
+      # byebug
       flash[:errors] = @wine.errors.full_messages
       render :new
     end
@@ -79,7 +80,8 @@ class WinesController < ApplicationController
         :bottled_date,
         :barrel,
         :barrel_location,
-        :varietal_id
+        :varietal_id,
+        varietal_attributes: [:name]
         )
     end
 end
