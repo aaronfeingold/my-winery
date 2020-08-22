@@ -1,6 +1,7 @@
 class WinesController < ApplicationController
   before_action :set_wine, except: [:index, :new, :create]
   before_action :set_varietal, only: [:show]
+  before_action :current_user
   before_action :logged_in?
   before_action :require_login
 
@@ -8,21 +9,15 @@ class WinesController < ApplicationController
   end
 
   def index
-    @user = User.find_by_id(params[:user_id])
     if params[:term]
-      @wines = @user.wines.search(params[:term])
+      @wines = current_user.wines.search(params[:term])
     else
-      @wines = @user.wines
+      @wines = current_user.wines
     end
   end
 
   def new
-    if logged_in?
       @wine = current_user.wines.build
-    else
-      flash[:error] = "You must be logged_in in order to do that"
-      redirect_to login_path 
-    end 
   end
 
   def create
@@ -64,13 +59,13 @@ class WinesController < ApplicationController
   private
 
     def set_wine
-      @wine = Wine.find_by_id(params[:id])
+      @wine = current_user.wines.find_by_id(params[:id])
     end
 
     def set_varietal
       @varietal = Varietal.find_by_id(@wine.varietal_id)
     end
-
+    
     def strong_wine_params
       params.require(:wine).permit(
         :name,
