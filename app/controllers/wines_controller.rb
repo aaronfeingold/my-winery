@@ -1,9 +1,10 @@
 class WinesController < ApplicationController
   before_action :set_wine, except: [:index, :new, :create]
+  before_action :set_varietal, only: [:show]
   before_action :logged_in?
+  before_action :require_login
 
   def show
-    @wine = Wine.find(params[:id])
   end
 
   def index
@@ -27,6 +28,7 @@ class WinesController < ApplicationController
   def create
     @wine = current_user.wines.build(strong_wine_params)
     if @wine.save
+      flash[:notice] = "Wine successfully created"
       redirect_to user_wines_path(current_user)
     else
       flash[:errors] = @wine.errors.full_messages
@@ -55,7 +57,6 @@ class WinesController < ApplicationController
   end
 
   def destroy
-    @wine = Wine.find(params[:id])
     @wine.destroy
     redirect_to user_wines_path(current_user)
   end
@@ -64,6 +65,10 @@ class WinesController < ApplicationController
 
     def set_wine
       @wine = Wine.find_by_id(params[:id])
+    end
+
+    def set_varietal
+      @varietal = Varietal.find_by_id(@wine.varietal_id)
     end
 
     def strong_wine_params
