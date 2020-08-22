@@ -12,6 +12,8 @@
     <tr>
       <th>Wine Name</th>
       <th>Varietal</th>
+      <th>Barrel Location</th>
+      <th>Barrel</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -21,7 +23,8 @@
       <tr>
         <td><%= wine.name %></td>
         <td><%= varietal = Varietal.find_by_id(wine.varietal_id).name %></td>
-       
+        <td><%= wine.barrel_location %></td>
+        <td><%= wine.barrel %></td>
         <td>
           <%= link_to 'View', wine %> |
           <%= link_to 'Edit', edit_wine_path(wine) %> |

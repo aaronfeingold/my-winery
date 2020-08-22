@@ -28,8 +28,9 @@ class WinesController < ApplicationController
       flash[:notice] = "Wine successfully created"
       redirect_to user_wines_path(current_user)
     else
-      # byebug
-      flash[:errors] = @wine.errors.full_messages
+      @wine = current_user_wines.build(strong_wine_params)
+      flash.now[:notice] = "Invalid"
+      flash.now[:errors] = @wine.errors.full_messages
       render :new
     end
   end
@@ -39,8 +40,9 @@ class WinesController < ApplicationController
 
   def update
       if @wine.update(strong_wine_params)
-          redirect_to user_wine_path(params[:id])
+          redirect_to user_wines_path(current_user)
       else
+        # byebug
         flash[:error] = @wine.errors.full_messages
         render :edit
       end
