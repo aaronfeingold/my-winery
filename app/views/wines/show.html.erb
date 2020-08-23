@@ -1,14 +1,50 @@
-<h1>Wine Name: <%= @wine.name %></h1>
-<h3>Varietal: <%= @varietal.name %></h3>
-<h3>Barrel Number: <%= @wine.barrel %></h3>
-<h3>Barrel Location: <%= @wine.barrel_location %></h3>
-<h3>Bottled? <%= @wine.bottled  ? "Yes" : "No" %></h3>
-<% if @wine.bottled_date %>
-<h3>Bottling Date: <%= @wine.bottled_date  %></h3>
-<% else %>
-<% end %>
+<h3>Wine Info</h3>
 
-</h3>
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+
+  <tbody>
+   
+      <tr>
+        <td>Name: </td>
+        <td><%= @wine.name %></td>
+      </tr>
+
+      <tr>
+        <td>Varietal: </td>
+        <td><%= @varietal.name %></td>
+      </tr>
+
+      <tr>
+        <td>Barrel Number: </td>
+        <td><%= @wine.barrel %></td>
+      </tr> 
+
+      <tr>
+        <td>Barrel Location: </td>
+        <td><%= @wine.barrel_location %></td>
+      </tr>  
+
+      <tr>
+        <td>Bottled? </td>
+        <td><%= @wine.bottled ? "Yes" : "no" %></td>
+      </tr>
+
+      <tr>
+      <% if @wine.bottled_date %>
+        <td>Bottling Date: </td>
+        <td><%= @wine.bottled_date  %></td>
+      <% else %>
+      <% end %>
+      </tr>
+  </tbody>
+</table>
+
 
 <%# add link to edit %>
 <%= link_to "Edit Wine", edit_wine_path(@wine) %> 

@@ -16,12 +16,12 @@ Rails.application.routes.draw do
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy'
+  delete '/logout' => 'sessions#destroy' 
 
   get '/filter' => 'wines#filter'
   
   match '/auth/github/callback', to: 'sessions#githubcreate', via: [:get, :post]
 
-  match '*a' => 'wines#index', via: [:get]
+  # match '*a' => 'wines#index', via: [:get]
 
 end

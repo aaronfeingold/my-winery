@@ -1,6 +1,10 @@
 <% if !logged_in? %>
-  <p>Are you a winemaker? If so, feel free to create an account or login</p>
-
+<div>
+  <p>Are you a winemaker? If you are just finding yourself here</p>
+  <p>this site is made to help you manage your unbottled inventory</p>
+  <p>Signing up is very easy</p>
+  <p>If you are familiar with the site, feel free to get back to work</p>
+</div>
 <% else %>
 <h4>Welcome Back <%= current_user.name %></h4>
 <h3>This is your Winery</h3>
@@ -9,7 +13,7 @@
   <p>And have celebrated many fine vintages.</p>
   <p>But times are rough, and you have tons of liters</p>
   <p>of beautiful juice just sitting in barrels,</p>
-  <p>waiting to be bottled and sold</p>
+  <p>waiting to be bottled and sold.</p>
   <p>But, alas, which ones?</p>
   <p>let's find out...</p>
 </div>

@@ -20,14 +20,10 @@ class SessionsController < ApplicationController
       end 
   end 
 
-  def githubcreate 
-      @user = User.find_or_create_by(uid: auth[:uid]) do |user|
-          user.username = auth[:info][:nickname]
-          user.email = auth[:info][:nickname] + "@howdoigetaroundthis.com"
-          user.password = SecureRandom.hex
-      end 
-      session[:user_id] = @user.id
-      redirect_to concerts_path
+  def githubcreate
+   user = User.find_or_create_from_omniauth(auth)
+   session[:user_id] = user.id
+   redirect_to root_path
   end 
 
   def destroy 
@@ -36,8 +32,11 @@ class SessionsController < ApplicationController
   end 
 
   private 
+    def user_params
+        params.require(:user).permit(:email, :pasword)
+    end
 
-  def auth 
-      request.env['omniauth.auth']
-  end 
+    def auth 
+        request.env['omniauth.auth']
+    end 
 end
