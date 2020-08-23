@@ -22,7 +22,7 @@
     <% @wines.each do | wine| %>
       <tr>
         <td><%= wine.name %></td>
-        <td><%= varietal = Varietal.find_by_id(wine.varietal_id).name %></td>
+        <td><%= Varietal.find_by_id(wine.varietal_id).name %></td>
         <td><%= wine.barrel_location %></td>
         <td><%= wine.barrel %></td>
         <td>
