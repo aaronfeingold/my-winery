@@ -18,7 +18,7 @@
   
     <%# a collection check box for varietals %>
   <%= f.label :varietal %>
-  <%= f.collection_select :varietal_id, varietals, :id, :name %>
+  <%= f.collection_select :varietal_id, varietals, :id, :name, include_blank: "Select Varietal" %>
     <%# Add a form to add a new varietal %>
 
   <h5>Create Varietal</h5>
