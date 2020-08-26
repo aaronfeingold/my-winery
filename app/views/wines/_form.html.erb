@@ -9,9 +9,11 @@
   <%= f.label :barrel_location %>
   <%= f.select :barrel_location, options_for_select(["Main Warehouse", "Overflow", "Offsite"]) %>
   <br>
+ 
   <%= f.label :bottled? %>
   <%= f.select :bottled, options_for_select([false, true]) %>
   <br>
+
   <%= f.label :bottled_date %>
   <%= f.date_field :bottled_date %>
   <br>
