@@ -13,7 +13,7 @@
       <th>Wine Name</th>
       <th>Varietal</th>
       <th>Barrel Location</th>
-      <th>Barrel</th>
+      <th>Bottled?</th>
       <th>Actions</th>
     </tr>
   </thead>
@@ -24,7 +24,7 @@
         <td><%= wine.name %></td>
         <td><%= Varietal.find_by_id(wine.varietal_id).name %></td>
         <td><%= wine.barrel_location %></td>
-        <td><%= wine.barrel %></td>
+        <td><%= wine.bottled ? "Yes" : "no" %></td>
         <td>
           <%= link_to 'View', wine %> |
           <%= link_to 'Edit', edit_wine_path(wine) %> |

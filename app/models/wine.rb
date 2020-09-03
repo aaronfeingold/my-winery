@@ -6,7 +6,7 @@ class Wine < ApplicationRecord
   accepts_nested_attributes_for :varietal, reject_if: :all_blank
   
   validates :name, presence: true
-  validates :barrel, numericality: { only_integer: true }
+  # validates :barrel, numericality: { only_integer: true }
   validate :bottled_date_cannot_be_in_the_future
 
   # def validate!
