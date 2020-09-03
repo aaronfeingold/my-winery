@@ -2,7 +2,6 @@ class SessionsController < ApplicationController
   include SessionsHelper
   before_action :redirect_if_logged_in
   skip_before_action :redirect_if_logged_in, except: [:new, :create]
-  
 
   def home
     current_user
