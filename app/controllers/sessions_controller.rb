@@ -1,5 +1,8 @@
 class SessionsController < ApplicationController
- 
+  include SessionsHelper
+  before_action :redirect_if_logged_in
+  skip_before_action :redirect_if_logged_in, except: [:new, :create]
+  
 
   def home
     current_user
@@ -12,12 +15,11 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
-      session[:user_id] = @user.id
-          redirect_to root_path
-      else 
-          flash[:error] = "Wrong you are, Try again you must"
-          redirect_to login_path 
-      end 
+        login_and_redirect(@user)
+    else
+        flash[:notice] = "There are errors"
+        redirect_to login_path
+    end
   end 
 
   def githubcreate
@@ -39,4 +41,9 @@ class SessionsController < ApplicationController
     def auth 
         request.env['omniauth.auth']
     end 
+
+    def login_and_redirect(user)
+        login_user(user.id)
+        redirect_if_logged_in
+    end
 end
