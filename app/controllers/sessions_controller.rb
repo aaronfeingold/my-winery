@@ -16,15 +16,14 @@ class SessionsController < ApplicationController
     if @user && @user.authenticate(params[:user][:password])
         login_and_redirect(@user)
     else
-        flash[:notice] = "There are errors"
+        flash[:alert] = "Incorrect email and/or password"
         redirect_to login_path
     end
   end 
 
   def githubcreate
-   user = User.find_or_create_from_omniauth(auth)
-   session[:user_id] = user.id
-   redirect_to root_path
+   @user = User.find_or_create_from_omniauth(auth)
+   login_and_redirect(@user)
   end 
 
   def destroy 

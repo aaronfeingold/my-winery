@@ -14,4 +14,12 @@ class User < ApplicationRecord
       user.password = Securerandom.hex
     end
   end 
+
+  
+  scope :find_user_with_largest_amount_of_wines, -> { User.all.max{ |a,b| a.wines.length <=> b.wines.length }}
+
+
+
+
+  
 end

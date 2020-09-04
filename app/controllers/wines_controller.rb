@@ -1,5 +1,5 @@
 class WinesController < ApplicationController
-
+include WinesHelper
   before_action :current_user_wines, only: [:index]
   before_action :set_wine, except: [:index, :new, :create]
   before_action :seed_varietals, only: [:new, :create, :edit, :update]

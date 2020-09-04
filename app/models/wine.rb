@@ -24,5 +24,5 @@ class Wine < ApplicationRecord
   scope :sorted_not_bottled_wines, -> { self.not_bottled.order(name: :desc)}
   scope :search, -> (term) { self.sorted_not_bottled_wines.where("name LIKE ?", "%#{term}%") }
  
-
+  
 end

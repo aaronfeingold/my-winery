@@ -4,11 +4,11 @@ Rails.application.routes.draw do
   resources :wines
   resources :varietals
   
-  resources :users, only: [:new, :create, :destroy] do 
+  resources :users do 
     resources :wines
   end 
   
-  resources :users, only: [:new, :create, :destroy] do 
+  resources :users do 
     resources :varietals
   end 
 
