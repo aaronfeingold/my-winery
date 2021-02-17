@@ -1,24 +1,11 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Welcome to My Winery!
 
-Things you may want to cover:
+The goal is to find juice that's ready to bottle. This app was intended to assist in such a matter. It may one day still.
 
-* Ruby version
+Fork Clone Bundle Install...rails db:create && migrate and launch a server. Or visit the link below:
 
-* System dependencies
+https://my-winery-1.herokuapp.com/
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Happy fermenting!
