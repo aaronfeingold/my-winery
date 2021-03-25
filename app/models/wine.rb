@@ -9,9 +9,6 @@ class Wine < ApplicationRecord
   validates :barrel, numericality: { only_integer: true }
   validate :bottled_date_cannot_be_in_the_future
 
-  # def validate!
-  #   errors.add(:name, :blank, message: "cannot be nil") if name.nil?
-  # end
   
   def bottled_date_cannot_be_in_the_future
     if bottled_date.present? && bottled_date > Date.today

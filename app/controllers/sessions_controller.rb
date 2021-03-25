@@ -13,7 +13,8 @@ class SessionsController < ApplicationController
     @user = User.find_by(email: params[:user][:email])
     if @user && @user.authenticate(params[:user][:password])
       session[:user_id] = @user.id
-          redirect_to root_path
+          redirect_to root_path,
+          :notice => "Signed in!"
       else 
           flash[:error] = "Wrong you are, Try again you must"
           redirect_to login_path 
@@ -21,9 +22,9 @@ class SessionsController < ApplicationController
   end 
 
   def githubcreate
-   user = User.find_or_create_from_omniauth(auth)
-   session[:user_id] = user.id
-   redirect_to root_path
+    user = User.find_or_create_from_omniauth(auth)
+    session[:user_id] = user.id
+    redirect_to root_path
   end 
 
   def destroy 
@@ -33,10 +34,10 @@ class SessionsController < ApplicationController
 
   private 
     def user_params
-        params.require(:user).permit(:email, :pasword)
+        params.require(:user).permit(:email, :password)
     end
 
     def auth 
-        request.env['omniauth.auth']
+        request.env["omniauth.auth"]
     end 
 end

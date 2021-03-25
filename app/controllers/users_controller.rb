@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    if password_confirmed
+    if password_confirmed == true
       @user = User.new(user_params)
         if @user.save
           session[:user_id] = @user.id
@@ -16,12 +16,9 @@ class UsersController < ApplicationController
           flash[:errors] = @user.errors.full_messages
           render :new
         end
-    elsif !password_confirmed
+    elsif password_confirmed == false
       @user = User.new(user_params)
-        if @user.save
-          session[:user_id] = @user.id
-          redirect_to root_path  
-        else
+        if !@user.save
           flash[:errors] = @user.errors.full_messages
           render :new
         end
@@ -29,7 +26,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    if current_user.id == params[:id].to_i
+    if current_user_confirmation == true
       render :show
     else
       flash[:alert] = "You don't have permission to access that profile"
@@ -38,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    if current_user.id == params[:id].to_i
+    if current_user_confirmation == true
       render :edit
     else
       flash[:alert] = "You don't have permission to edit that profile"
@@ -78,4 +75,8 @@ class UsersController < ApplicationController
   def password_confirmed
     user_params[:password] == user_params[:password_confirmation]
   end 
+
+  def current_user_confirmation
+    current_user.id == params[:id].to_i
+  end
 end

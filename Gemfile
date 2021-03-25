@@ -24,8 +24,6 @@ gem 'bcrypt', '~> 3.1.7'
 
 gem 'rack-flash3'
 
-gem 'devise'
-
 gem 'materialize-sass'
 
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'

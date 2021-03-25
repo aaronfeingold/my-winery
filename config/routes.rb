@@ -17,11 +17,9 @@ Rails.application.routes.draw do
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy' 
-
-  get '/filter' => 'wines#filter'
   
-  match '/auth/github/callback', to: 'sessions#githubcreate', via: [:get, :post]
+  # omniauth only with github. no facbook, so no need for :provider
+  match '/auth/:provider/callback', to: 'sessions#githubcreate', via: [:get, :post]
 
-  # match '*a' => 'wines#index', via: [:get]
 
 end

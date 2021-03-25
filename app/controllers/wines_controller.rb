@@ -14,6 +14,7 @@ class WinesController < ApplicationController
 
   def index
     if params[:term]
+      #use the search method (from wine model)
       @wines = current_user_wines.search(params[:term])
     end
   end
@@ -55,11 +56,7 @@ class WinesController < ApplicationController
     def set_wine
       @wine = current_user.wines.find_by_id(params[:id])
     end 
-
-    # def set_varietal_name     
-    #   @varietal = Varietal.find_by_id(current_user_wines.find_by_id(params[:id]).varietal_id).name
-    # end 
-
+    
     def show_varietal
       @varietal = Varietal.find_by_id(@wine.varietal_id)
     end
