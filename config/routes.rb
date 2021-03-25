@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   delete '/logout' => 'sessions#destroy' 
   
   # omniauth only with github. no facbook, so no need for :provider
-  match '/auth/github/callback', to: 'sessions#githubcreate', via: [:get, :post]
+  match '/auth/:provider/callback', to: 'sessions#githubcreate', via: [:get, :post]
 
 
 end
