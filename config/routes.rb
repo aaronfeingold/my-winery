@@ -1,25 +1,23 @@
-Rails.application.routes.draw do
-  
+# frozen_string_literal: true
 
+Rails.application.routes.draw do
   resources :wines
   resources :varietals
-  
-  resources :users, only: [:new, :create, :destroy] do 
+
+  resources :users, only: %i[new create destroy] do
     resources :wines
-  end 
-  
-  resources :users, only: [:new, :create, :destroy] do 
+  end
+
+  resources :users, only: %i[new create destroy] do
     resources :varietals
-  end 
+  end
 
   root 'sessions#home'
   get '/signup' => 'users#new'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
-  delete '/logout' => 'sessions#destroy' 
-  
+  delete '/logout' => 'sessions#destroy'
+
   # omniauth only with github. no facbook, so no need for :provider
-  match '/auth/:provider/callback', to: 'sessions#githubcreate', via: [:get, :post]
-
-
+  match '/auth/:provider/callback', to: 'sessions#githubcreate', via: %i[get post]
 end
