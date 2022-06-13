@@ -1,12 +1,14 @@
 
 default: &default
-  adapter: sqlite3
+  adapter: postresql
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
   timeout: 5000
 
 development:
   <<: *default
-  database: db/development.sqlite3
+  database: <%= ENV['DEVELOPMENT_DATABASE']%>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -16,5 +18,7 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postresql
-  database: db/production
+  <<: *default
+  database: <%= ENV['PRODUCTION_DATABASE'] %>
+  username: <%= ENV['DATABASE_USERNAME'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
