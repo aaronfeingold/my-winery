@@ -7,8 +7,6 @@ ruby '3.0.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
-# SQLite3 in dev
-gem 'sqlite3'
 # Postgres for production
 gem 'pg'
 # Use Puma as the app server
