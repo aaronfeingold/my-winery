@@ -1,27 +1,30 @@
+# frozen_string_literal: true
+
 class UsersController < ApplicationController
-  before_action :require_login, only: [:show, :edit, :update, :destroy]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :require_login, only: %i[show edit update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
 
   def new
     @user = User.new
   end
 
   def create
-    if password_confirmed == true
+    case password_confirmed
+    when true
       @user = User.new(user_params)
-        if @user.save
-          session[:user_id] = @user.id
-          redirect_to root_path  
-        else
-          flash[:errors] = @user.errors.full_messages
-          render :new
-        end
-    elsif password_confirmed == false
+      if @user.save
+        session[:user_id] = @user.id
+        redirect_to root_path
+      else
+        flash[:errors] = @user.errors.full_messages
+        render :new
+      end
+    when false
       @user = User.new(user_params)
-        if !@user.save
-          flash[:errors] = @user.errors.full_messages
-          render :new
-        end
+      unless @user.save
+        flash[:errors] = @user.errors.full_messages
+        render :new
+      end
     end
   end
 
@@ -45,8 +48,8 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to user_path(@user), {notice: "#{@user.email}, your " \
-        "profile has been updated"}
+      redirect_to user_path(@user), { notice: "#{@user.email}, your " \
+        'profile has been updated' }
     else
       render :edit
     end
@@ -55,10 +58,11 @@ class UsersController < ApplicationController
   def destroy
     @user.update_room_inventory
     @user.destroy
-    redirect_to root_path, {notice: 'Your account has been deleted' }
+    redirect_to root_path, { notice: 'Your account has been deleted' }
   end
 
   private
+
   def set_user
     @user = current_user
   end
@@ -74,7 +78,7 @@ class UsersController < ApplicationController
 
   def password_confirmed
     user_params[:password] == user_params[:password_confirmation]
-  end 
+  end
 
   def current_user_confirmation
     current_user.id == params[:id].to_i

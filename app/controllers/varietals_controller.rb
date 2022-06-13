@@ -1,8 +1,9 @@
-class VarietalsController < ApplicationController
-  before_action :set_varietal, except: [:index, :new, :create]
+# frozen_string_literal: true
 
-  def show
-  end
+class VarietalsController < ApplicationController
+  before_action :set_varietal, except: %i[index new create]
+
+  def show; end
 
   def index
     @varietals = Varietal.all
@@ -15,7 +16,7 @@ class VarietalsController < ApplicationController
   def create
     # byebug
     @varietal = Varietal.build(strong_params)
-    if @varietal.save 
+    if @varietal.save
       redirect_to varietals_path
     else
       flash[:errors] = @varietal.errors.full_messages
@@ -23,21 +24,19 @@ class VarietalsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit; end
 
-  def update
-  end
+  def update; end
 
-  def destroy
-  end
+  def destroy; end
 
   private
 
-    def set_varietal
-      @varietal = Varietal.find_by_id(params[:id])
-    end
-    def strong_params
-      params.require(:varietal).permit(:name)
-    end
+  def set_varietal
+    @varietal = Varietal.find_by_id(params[:id])
+  end
+
+  def strong_params
+    params.require(:varietal).permit(:name)
+  end
 end

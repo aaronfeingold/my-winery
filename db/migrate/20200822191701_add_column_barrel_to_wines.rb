@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddColumnBarrelToWines < ActiveRecord::Migration[6.0]
   def change
     add_column :wines, :barrel, :integer

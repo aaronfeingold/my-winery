@@ -3,7 +3,5 @@
 <%= render partial: 'form', locals: {user: @user, button_name: "Sign Up"} %>
 
 
-
-<br /><%= link_to 'Register with Github', '/auth/github' %><br />
-
+<br /><%= link_to('Register with GitHub!', '/auth/github', method: :post) %><br />
 <br /><%= link_to 'Log in', login_path %>
