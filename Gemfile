@@ -28,6 +28,8 @@ gem 'materialize-sass'
 
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 
+gem "omniauth-rails_csrf_protection"
+
 gem 'dotenv-rails'
 
 gem 'rubocop', require: false
